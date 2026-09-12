@@ -13,7 +13,7 @@ class ContractDateFixtures extends AbstractFixtures implements DependentFixtureI
 {
     public function load(ObjectManager $manager): void
     {
-        ContractDateFactory::createMany(100);
+        ContractDateFactory::createMany(30);
     }
 
     protected static function modelClass(): string

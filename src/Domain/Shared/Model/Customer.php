@@ -252,7 +252,7 @@ class Customer implements UserDomainInterface, PasswordAuthenticatedUserInterfac
         return $this->password;
     }
 
-    public function setPassword(string $hashedPassword): self
+    public function setPassword(?string $hashedPassword): self
     {
         $this->password = $hashedPassword;
 

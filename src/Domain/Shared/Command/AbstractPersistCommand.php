@@ -9,7 +9,7 @@ abstract class AbstractPersistCommand implements CommandInterface
     /**
      * @param array<string, mixed> $primitives
      */
-    final protected function __construct(public array $primitives)
+    protected function __construct(public array $primitives)
     {
     }
 }

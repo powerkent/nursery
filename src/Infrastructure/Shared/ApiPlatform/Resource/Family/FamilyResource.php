@@ -10,11 +10,12 @@ use ApiPlatform\Metadata\Delete;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\Post;
+use ApiPlatform\Metadata\Put;
 use DateTimeInterface;
 use Nursery\Domain\Shared\Enum\Roles;
 use Nursery\Infrastructure\Shared\ApiPlatform\Input\FamilyInput;
 use Nursery\Infrastructure\Shared\ApiPlatform\Processor\Family\FamilyDeleteProcessor;
-use Nursery\Infrastructure\Shared\ApiPlatform\Processor\Family\FamilyPostProcessor;
+use Nursery\Infrastructure\Shared\ApiPlatform\Processor\Family\FamilyProcessor;
 use Nursery\Infrastructure\Shared\ApiPlatform\Provider\Family\FamilyCollectionProvider;
 use Nursery\Infrastructure\Shared\ApiPlatform\Provider\Family\FamilyProvider;
 use Nursery\Infrastructure\Shared\ApiPlatform\View\Child\ChildView;
@@ -35,12 +36,19 @@ use Symfony\Component\Serializer\Annotation\Groups;
             security: "is_granted('".Roles::Manager->value."') or is_granted('".Roles::Agent->value."')",
             provider: FamilyCollectionProvider::class
         ),
+        new Put(
+            normalizationContext: ['groups' => ['family:item', 'family:put:read']],
+            denormalizationContext: ['groups' => ['family:item', 'family:put:write']],
+            input: FamilyInput::class,
+            provider: FamilyProvider::class,
+            processor: FamilyProcessor::class,
+        ),
         new Post(
             normalizationContext: ['groups' => ['family:item', 'family:post:read']],
             denormalizationContext: ['groups' => ['family:item', 'family:post:write']],
             input: FamilyInput::class,
             provider: FamilyProvider::class,
-            processor: FamilyPostProcessor::class,
+            processor: FamilyProcessor::class,
         ),
         new Delete(
             security: "is_granted('".Roles::Manager->value."')",
@@ -57,22 +65,22 @@ class FamilyResource
      */
     public function __construct(
         #[ApiProperty(identifier: true)]
-        #[Groups(['family:list', 'family:list'])]
+        #[Groups(['family:item', 'family:list'])]
         public UuidInterface $uuid,
-        #[Groups(['family:list', 'family:list'])]
+        #[Groups(['family:item', 'family:list'])]
         public string $name,
-        #[Groups(['family:list', 'family:list'])]
+        #[Groups(['family:item', 'family:list'])]
         public ?CustomerView $customerA,
-        #[Groups(['family:list', 'family:list'])]
+        #[Groups(['family:item', 'family:list'])]
         public ?CustomerView $customerB,
-        #[Groups(['family:list', 'family:list'])]
+        #[Groups(['family:item', 'family:list'])]
         public DateTimeInterface $createdAt,
-        #[Groups(['family:list', 'family:list'])]
+        #[Groups(['family:item', 'family:list'])]
         public ?DateTimeInterface $updatedAt,
-        #[Groups(['family:list', 'family:list'])]
+        #[Groups(['family:item', 'family:list'])]
         /** @var array<int, ChildView> */
         public array $children,
-        #[Groups(['family:list', 'family:list'])]
+        #[Groups(['family:item', 'family:list'])]
         /** @var array<int, TrustedPersonView> */
         public array $trustedPersons,
     ) {

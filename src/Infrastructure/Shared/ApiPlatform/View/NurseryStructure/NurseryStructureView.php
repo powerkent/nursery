@@ -19,7 +19,7 @@ class NurseryStructureView
         public UuidInterface $uuid,
         #[Groups(['child:item', 'child:list', 'customer:item', 'agent:item', 'shiftType:item', 'shiftType:list'])]
         public ?int $id,
-        #[Groups(['child:item', 'child:list', 'customer:item', 'agent:item', 'shiftType:item', 'shiftType:list'])]
+        #[Groups(['child:item', 'child:list', 'customer:item', 'agent:item', 'agent:list', 'shiftType:item', 'shiftType:list'])]
         public string $name,
         #[Groups(['child:item', 'child:list', 'customer:item', 'agent:item', 'shiftType:item', 'shiftType:list'])]
         public AddressView $address,

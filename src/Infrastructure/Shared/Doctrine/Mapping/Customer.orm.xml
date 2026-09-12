@@ -31,9 +31,10 @@
         </one-to-one>
 
         <many-to-one field="family" target-entity="Nursery\Domain\Shared\Model\Family">
-            <join-column name="family_id" nullable="false" />
+            <join-column name="family_id" />
             <cascade>
                 <cascade-persist />
+                <cascade-remove />
             </cascade>
         </many-to-one>
 

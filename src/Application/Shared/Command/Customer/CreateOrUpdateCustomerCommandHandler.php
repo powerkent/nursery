@@ -31,20 +31,22 @@ final readonly class CreateOrUpdateCustomerCommandHandler implements CommandHand
         if (null !== $customer) {
             $family = $command->primitives['family'];
             unset($command->primitives['family']);
-            $customer = $this->normalizer->denormalize($command->primitives, Customer::class, context: ['object_to_populate' => $customer, 'ignored_attributes' => [$password]]);
+            $customer = $this->normalizer->denormalize($command->primitives, Customer::class, context: ['object_to_populate' => $customer, 'ignored_attributes' => ['password', 'address', 'avatar']]);
             $customer
-                ->setPassword($this->passwordHasher->hashPassword($customer, $password))
+                ->setPassword(null !== $password ? $this->passwordHasher->hashPassword($customer, $password) : null)
                 ->setFamily($family)
-                ->setUpdatedAt(new DateTimeImmutable());
-
+                ->setUpdatedAt(new DateTimeImmutable())
+                ->setAddress($command->primitives['address']);
 
             return $this->customerRepository->update($customer);
         }
 
         $command->primitives['avatar'] = null;
         $command->primitives['createdAt'] = new DateTimeImmutable();
-        $customer = new Customer(...$command->primitives);
-        $customer->setPassword($this->passwordHasher->hashPassword($customer, $password));
+        $customer = new Customer(...$command->primitives)
+            ->setPassword(null !== $password ? $this->passwordHasher->hashPassword($customer, $password) : null)
+            ->setFamily($command->primitives['family'])
+            ->setAddress($command->primitives['address']);
 
         return $this->customerRepository->save($customer);
     }

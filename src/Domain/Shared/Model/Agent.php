@@ -245,7 +245,7 @@ class Agent implements UserDomainInterface, PasswordAuthenticatedUserInterface
         return $this->password;
     }
 
-    public function setPassword(string $hashedPassword): self
+    public function setPassword(?string $hashedPassword): self
     {
         $this->password = $hashedPassword;
 

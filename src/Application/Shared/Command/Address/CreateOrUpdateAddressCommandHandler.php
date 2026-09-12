@@ -24,11 +24,12 @@ final readonly class CreateOrUpdateAddressCommandHandler implements CommandHandl
             $address = $this->addressRepository->search((int) $command->primitives['id']);
 
             if (null !== $address) {
-                $address = $this->normalizer->denormalize($command->primitives, Address::class, context: ['object_to_populate' => $address]);
+                $address = $this->normalizer->denormalize($command->primitives, Address::class, context: ['object_to_populate' => $address, 'ignored_attributes' => ['id']]);
 
                 return $this->addressRepository->update($address);
             }
         }
+
         unset($command->primitives['id']);
         $address = new Address(...$command->primitives);
 

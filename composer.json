@@ -13,6 +13,7 @@
         "doctrine/doctrine-bundle": "^2.10",
         "doctrine/doctrine-migrations-bundle": "^3.4",
         "doctrine/orm": "^3.4",
+        "giggsey/libphonenumber-for-php": "^8.13",
         "illuminate/http": "^11.37",
         "lcobucci/jwt": "^5.0",
         "league/flysystem": "^3.29",

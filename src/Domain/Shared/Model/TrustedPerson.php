@@ -11,21 +11,15 @@ class TrustedPerson
     protected ?int $id = null;
 
     public function __construct(
-        protected UuidInterface $uuid,
         protected string $firstname,
         protected string $lastname,
-        protected Family $family,
+        protected ?Family $family,
     ) {
     }
 
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getUuid(): UuidInterface
-    {
-        return $this->uuid;
     }
 
     public function getFirstname(): string
@@ -52,12 +46,12 @@ class TrustedPerson
         return $this;
     }
 
-    public function getFamily(): Family
+    public function getFamily(): ?Family
     {
         return $this->family;
     }
 
-    public function setFamily(Family $family): self
+    public function setFamily(?Family $family): self
     {
         $this->family = $family;
 

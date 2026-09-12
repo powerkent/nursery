@@ -13,7 +13,7 @@ class ChildFixtures extends AbstractFixtures implements DependentFixtureInterfac
 {
     public function load(ObjectManager $manager): void
     {
-        ChildFactory::createMany(100);
+        ChildFactory::createMany(30);
     }
 
     protected static function modelClass(): string

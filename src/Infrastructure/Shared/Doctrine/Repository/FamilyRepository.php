@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace Nursery\Infrastructure\Shared\Doctrine\Repository;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Nursery\Domain\Shared\Model\Family;
+use Nursery\Domain\Shared\Model\TrustedPerson;
 use Nursery\Domain\Shared\Repository\FamilyRepositoryInterface;
 
 /**

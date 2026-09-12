@@ -18,12 +18,14 @@ final readonly class CustomerViewFactory
     {
         return new CustomerView(
             uuid: $customer->getUuid(),
+            avatar: $customer->getAvatar()?->getContentUrl(),
             firstname: $customer->getFirstname(),
             lastname: $customer->getLastname(),
             email: $customer->getEmail(),
             phoneNumber: $customer->getPhoneNumber(),
-            address: null !== $customer->getAddress() ? $this->addressViewFactory->fromModel($customer->getAddress()) : null,
+            income: $customer->getIncome(),
             createdAt: $customer->getCreatedAt(),
+            address: null !== $customer->getAddress() ? $this->addressViewFactory->fromModel($customer->getAddress()) : null,
         );
     }
 }

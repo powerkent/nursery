@@ -22,6 +22,7 @@ final readonly class ChildViewFactory
     {
         return new ChildView(
             uuid: $child->getUuid(),
+            avatar: $child->getAvatar()?->getContentUrl(),
             firstname: $child->getFirstname(),
             lastname: $child->getLastname(),
             birthday: $child->getBirthday(),

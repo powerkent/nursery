@@ -6,7 +6,7 @@ namespace Nursery\Infrastructure\Shared\ApiPlatform\Processor;
 
 use ApiPlatform\Metadata\Operation;
 use ApiPlatform\State\ProcessorInterface;
-use Nursery\Application\Shared\Command\Child\PersistChildCommand;
+use Nursery\Application\Shared\Command\Child\PersistFamilyCommand;
 use Nursery\Application\Shared\Command\ContractDate\DeleteContractDateByIdCommand;
 use Nursery\Application\Shared\Query\Child\FindChildByUuidOrIdQuery;
 use Nursery\Application\Shared\Query\ContractDate\FindContractDatesByDateQuery;
@@ -63,7 +63,7 @@ final readonly class ContractDatePostProcessor implements ProcessorInterface
 
         $child->setContractDates($contractDates);
 
-        $child = $this->commandBus->dispatch(new PersistChildCommand($child));
+        $child = $this->commandBus->dispatch(new PersistFamilyCommand($child));
 
         return $this->childCalendarEntryResourceFactory->fromModel($child);
     }

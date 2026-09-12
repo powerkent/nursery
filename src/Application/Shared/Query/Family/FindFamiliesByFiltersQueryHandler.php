@@ -19,6 +19,10 @@ final readonly class FindFamiliesByFiltersQueryHandler implements QueryHandlerIn
      */
     public function __invoke(FindFamiliesByFiltersQuery $query): array
     {
+        if (empty($query->filters)) {
+            return $this->familyRepository->all();
+        }
+
         return $this->familyRepository->searchByNurseryStructures($query->filters['nurseryStructures']);
     }
 }

@@ -15,7 +15,7 @@ class TreatmentView
      * @param array<int, DosageView> $dosages
      */
     public function __construct(
-        #[Groups(['child:item', 'child:list', 'customer:item'])]
+        #[Groups(['child:item', 'child:list', 'customer:item', 'nurseryStructure:item'])]
         public ?UuidInterface $uuid,
         #[Groups(['child:item', 'child:list', 'customer:item'])]
         public ?UuidInterface $childUuid,

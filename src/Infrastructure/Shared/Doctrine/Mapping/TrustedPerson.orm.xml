@@ -15,7 +15,7 @@
         <field name="lastname" length="255"/>
 
         <many-to-one field="family" target-entity="Nursery\Domain\Shared\Model\Family" inversed-by="trustedPersons">
-            <join-column name="family_id" nullable="false"/>
+            <join-column name="family_id" />
         </many-to-one>
     </entity>
 </doctrine-mapping>

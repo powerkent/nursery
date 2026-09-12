@@ -38,9 +38,11 @@ final readonly class CreateOrUpdateAgentCommandHandler implements CommandHandler
         if (null !== $agent) {
             $createdAt = $agent->getCreatedAt();
             unset($command->primitives['nurseryStructures'], $command->primitives['createdAt'], $command->primitives['updatedAt']);
-            $agent = $this->normalizer->denormalize($command->primitives, Agent::class, context: ['object_to_populate' => $agent]);
+            $agent = $this->normalizer->denormalize($command->primitives, Agent::class, context: ['object_to_populate' => $agent, 'ignored_attributes' => ['user', 'password']]);
+
             $agent
-                ->setPassword($this->passwordHasher->hashPassword($agent, $password))
+                ->setPassword(null !== $password ? $this->passwordHasher->hashPassword($agent, $password) : null)
+                ->setUser($command->primitives['user'] ?? null)
                 ->setCreatedAt($createdAt)
                 ->setUpdatedAt(new DateTimeImmutable());
 
@@ -51,8 +53,12 @@ final readonly class CreateOrUpdateAgentCommandHandler implements CommandHandler
 
         unset($command->primitives['nurseryStructures']);
         $agent = new Agent(...$command->primitives);
+        if (null !== $password) {
+            $agent
+                ->setPassword($this->passwordHasher->hashPassword($agent, $password))
+                ->setUser($command->primitives['user']);
+        }
         $agent
-            ->setPassword($this->passwordHasher->hashPassword($agent, $password))
             ->setCreatedAt(new DateTimeImmutable())
             ->setUpdatedAt(null);
 

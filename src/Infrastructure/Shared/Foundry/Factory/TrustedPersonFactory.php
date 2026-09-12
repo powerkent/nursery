@@ -26,10 +26,9 @@ final class TrustedPersonFactory extends PersistentProxyObjectFactory
     protected function defaults(): array
     {
         return [
-            'uuid' => Uuid::uuid4(),
             'firstname' => self::faker()->firstName(),
             'lastname' => self::faker()->lastName(),
-            'family' => FamilyFactory::randomOrCreate(),
+            'family' => FamilyFactory::random(),
         ];
     }
 }

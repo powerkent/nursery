@@ -147,6 +147,13 @@ class Family
         return $this->trustedPersons;
     }
 
+    public function setTrustedPersons(array|Collection $trustedPersons): self
+    {
+        $this->trustedPersons = is_array($trustedPersons) ? new ArrayCollection($trustedPersons) : $trustedPersons;
+
+        return $this;
+    }
+
     public function addTrustedPerson(TrustedPerson $person): self
     {
         if (!$this->trustedPersons->contains($person)) {

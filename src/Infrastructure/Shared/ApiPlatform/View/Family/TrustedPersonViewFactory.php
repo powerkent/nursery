@@ -11,6 +11,7 @@ final class TrustedPersonViewFactory
     public function fromModel(TrustedPerson $trustedPerson): TrustedPersonView
     {
         return new TrustedPersonView(
+            id: $trustedPerson->getId(),
             firstname: $trustedPerson->getFirstname(),
             lastname: $trustedPerson->getLastname(),
         );

@@ -13,7 +13,7 @@ class TrustedPersonFixtures extends AbstractFixtures implements DependentFixture
 {
     public function load(ObjectManager $manager): void
     {
-        TrustedPersonFactory::createMany(20);
+        TrustedPersonFactory::createMany(40);
     }
 
     protected static function modelClass(): string

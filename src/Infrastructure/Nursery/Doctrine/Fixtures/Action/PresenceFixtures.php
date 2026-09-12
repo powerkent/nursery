@@ -37,7 +37,7 @@ class PresenceFixtures extends AbstractFixtures implements DependentFixtureInter
 
     public function load(ObjectManager $manager): void
     {
-        $children = ChildFactory::randomRange(60, 90);
+        $children = ChildFactory::randomRange(30, 30);
 
         $now = new DateTimeImmutable()->format('Y-m-d');
 

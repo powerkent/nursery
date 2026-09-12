@@ -12,6 +12,8 @@ final class CustomerPayload
 {
     public function __construct(
         #[Groups(['family:item'])]
+        public ?string $uuid,
+        #[Groups(['family:item'])]
         #[Assert\NotBlank(message: 'Customer requires a firstname.')]
         public string $firstname,
         #[Groups(['family:item'])]
@@ -22,12 +24,12 @@ final class CustomerPayload
         #[ApiProperty(openapiContext: ['example' => 'parent@example.com'])]
         public string $email,
         #[Groups(['family:item'])]
-        #[ApiProperty(openapiContext: ['example' => '0606060606'])]
+        #[ApiProperty(openapiContext: ['example' => '+33606060606'])]
         public string $phoneNumber,
         #[Groups(['family:item'])]
-        public AddressPayload $address,
+        public ?float $income = null,
         #[Groups(['family:item'])]
-        public int $income,
+        public ?AddressPayload $address = null,
     ) {
     }
 }

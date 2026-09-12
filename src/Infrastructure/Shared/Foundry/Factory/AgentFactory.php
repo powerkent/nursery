@@ -38,7 +38,7 @@ final class AgentFactory extends PersistentProxyObjectFactory
 
         return [
             'uuid' => Uuid::uuid4(),
-            'avatar' => self::faker()->boolean() ? AvatarFactory::createOne(['type' => AvatarType::Agent, 'contentUrl' => $faker->imageUrl($firstname, $lastname)]) : null,
+            'avatar' => AvatarFactory::createOne(['type' => AvatarType::Agent, 'contentUrl' => $faker->imageUrl($firstname, $lastname)]),
             'firstname' => $firstname,
             'lastname' => $lastname,
             'email' => self::faker()->email(),

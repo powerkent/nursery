@@ -10,6 +10,8 @@ class TrustedPersonView
 {
     public function __construct(
         #[Groups(['family:item', 'family:list'])]
+        public ?int $id,
+        #[Groups(['family:item', 'family:list'])]
         public string $firstname,
         #[Groups(['family:item', 'family:list'])]
         public string $lastname,
